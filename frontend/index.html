@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexus Dispatch</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=4">
+</head>
+<body>
+
+  
+  <div id="map"></div>
+
+  <div class="search-container floating-search">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input type="text" id="custom-search" placeholder="Search destination...">
+  </div>
+
+
+  <aside class="panel">
+
+    <header class="panel-header">
+      <div>
+        <h1 class="title">Nexus Dispatch</h1>
+        <div class="status"><span class="dot"></span>DB Connected</div>
+      </div>
+      <button class="icon-btn" type="button" aria-label="Profile and settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path>
+        </svg>
+      </button>
+    </header>
+
+    <div class="pills" role="group" aria-label="Filter units">
+      <button class="pill active" type="button">All Units</button>
+      <button class="pill" type="button">Hospitals (ER)</button>
+      <button class="pill" type="button">Police</button>
+    </div>
+
+   
+    <p id="idle" class="idle">Tap map to calculate shortest road path.</p>
+
+   
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <span>Calculating shortest road path…</span>
+    </div>
+
+    
+    <section id="result" class="result hidden">
+      <span class="badge">HOSPITAL / ER</span>
+      <h2 class="facility">Zomba Central Hospital</h2>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="label">Estimated ETA</span>
+          <strong id="eta">5 mins</strong>
+        </div>
+        <div class="stat">
+          <span class="label">Road distance</span>
+          <strong id="dist" class="blue">2.4 km</strong>
+        </div>
+      </div>
+
+      <div id="hazard-warning" class="hazard hidden">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>Warning: Route crosses a reported flood zone.</span>
+      </div>
+
+      <p class="tech">PostGIS pgRouting: Dijkstra Shortest Path</p>
+    </section>
+
+  </aside>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="js/map.js?v=4"></script>
+</body>
+</html>
